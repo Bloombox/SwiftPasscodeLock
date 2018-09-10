@@ -38,10 +38,13 @@ open class PasscodeLock: PasscodeLockType {
     open func addSign(_ sign: String) {
         passcode.append(sign)
         delegate?.passcodeLock(self, addedSignAt: passcode.count - 1)
+        var capturedLockState = self.lockState
 
         if passcode.count >= configuration.passcodeLength {
-            lockState.accept(passcode: passcode, from: self)
-            passcode.removeAll(keepingCapacity: true)
+            DispatchQueue.main.async(execute: {
+                capturedLockState.accept(passcode: self.passcode, from: self)
+                self.passcode.removeAll(keepingCapacity: true)
+            })
         }
     }
 
