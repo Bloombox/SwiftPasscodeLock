@@ -26,6 +26,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
 
     @IBOutlet open var placeholders: [PasscodeSignPlaceholderView] = [PasscodeSignPlaceholderView]()
+    @IBOutlet open var digits: [PasscodeSignButton] = [PasscodeSignButton]()
     @IBOutlet open weak var titleLabel: UILabel?
     @IBOutlet open weak var descriptionLabel: UILabel?
     @IBOutlet open weak var cancelButton: UIButton?
@@ -85,6 +86,15 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         deleteSignButton?.setTitle(localizedStringFor(key: "PasscodeLockDeleteButtonTitle", comment: "Delete Button Title"), for: .normal)
 
         setupEvents()
+
+        for digit in digits {
+            digit.setTitle(digit.passcodeSign, for: .normal)
+            digit.layoutSubviews()
+        }
+        deleteSignButton?.setTitle("Delete", for: .normal)
+        cancelButton?.setTitle("Cancel", for: .normal)
+        deleteSignButton?.layoutSubviews()
+        cancelButton?.layoutSubviews()
     }
 
     open override func viewDidAppear(_ animated: Bool) {
