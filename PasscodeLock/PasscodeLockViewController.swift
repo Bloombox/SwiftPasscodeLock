@@ -75,6 +75,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
 
     // MARK: - View
+    open override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     open override func viewDidLoad() {
         super.viewDidLoad()
